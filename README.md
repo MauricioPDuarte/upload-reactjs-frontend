@@ -37,7 +37,10 @@
      ```
 
 ### Etapa 2
+ - Abrir `src/services/api.js` e alterar a baseURL.
 
+
+### Etapa 3
 ```shell
 $ yarn start
 ```
