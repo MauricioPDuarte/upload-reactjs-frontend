@@ -4,10 +4,10 @@ import { MdCheckCircle, MdError, MdLink } from 'react-icons/md';
 
 import { Container, FileInfo, Preview } from './styles';
 
-const FileList = ({ files }) => (
+const FileList = ({ files, onDelete }) => (
   <Container>
     {files.map(uploadedFile => (
-      <li>
+      <li key={uploadedFile.id}>
         <FileInfo>
           <Preview src={uploadedFile.preview} />
           <div>
@@ -15,14 +15,14 @@ const FileList = ({ files }) => (
             <span>
               {uploadedFile.readableSize}
               { !!uploadedFile.url && (
-                 <button onClick={() => { }}>Excluir</button>
+                 <button onClick={() => onDelete(uploadedFile.id)}>Excluir</button>
               )}
             </span>
           </div>
         </FileInfo>
 
         <div>
-          {!uploadedFile.uploadedFile && !uploadedFile.error && (
+          {!uploadedFile.uploaded && !uploadedFile.error && (
             <CircularProgressbar
               styles={{
                 root: { width: 24 },
@@ -35,7 +35,7 @@ const FileList = ({ files }) => (
 
           {uploadedFile.url && (
             <a
-              href="https://uploadexample-rocketseat.s3-sa-east-1.amazonaws.com/1eec1a6026c456f38f0d50b4a01f2ef2-Sem%20T%C3%ADtulo-1.png"
+              href={uploadedFile.url}
               target="_blank"
               rel="noopener noreferrer"
             >
